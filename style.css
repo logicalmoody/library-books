@@ -1,0 +1,65 @@
+
+
+body {
+    margin: 0px;
+}
+nav {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 40px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 80px;
+    padding-right: 180px;
+    padding-left: 180px;
+    margin: 20px;
+}
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+}
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}
+.INITIAL_TITLE_SRCH {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+}
+p {
+    font-family: 'Merriweather', serif;
+    font-weight: 100;
+    line-height: 25px;
+}
+form {
+    display: none;
+}
+
+section {
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    grid-template-rows: 20% 80%;
+}
+
+img {
+    grid-row: span 1;
+    grid-column: span 1;   
+    object-fit: contain;
+    object-position: center;
+    padding-left: 20px;
+}
+
+.enrichedContentElement {
+    grid-row: span 1;
+    grid-column: span 1;
+}
+
+/* @media only screen and (min-width: 600px) {}*/
+
+
