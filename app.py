@@ -7,9 +7,8 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 @app.route('/', methods=['GET', 'POST'])
 def home():
 	if request.method == 'POST':
-		# update review
-		x = request.form['barcode']
-		scrape(x)
+		barcode = request.form['barcode']
+		scrape(barcode)
 
 	return render_template('header.html')
 
