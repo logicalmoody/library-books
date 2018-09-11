@@ -65,13 +65,21 @@ while True:
 				review_list.append(str(div))
 		print("done")
 
+		# Scrape the title from the DOM
+		title = soup.find("div", {"class": "displayElementText INITIAL_TITLE_SRCH"})
+		# Scrape the picture from the DOM
+		picture_link = soup.find("img", {"id": "detailCover0"})
+		# removing garbage from the image link (might not be consistent)
+		picture_link = str(picture_link).replace("amp;", "")
+
 		# Write the HTML!
 		print("Generating HTML file... ", end="")
 		f = open("./templates/review.html", "w")
 
-		f.write("<input type='text' autofocus />")
-
 		# Write the book title here
+		f.write(str(title))
+		# Write the picture here
+		f.write(picture_link)
 
 		# Write the reviews
 		for rev in review_list:
