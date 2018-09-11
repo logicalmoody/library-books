@@ -1,7 +1,6 @@
 <html>
 	<form method="post">
-		<input type="text" name="barcode" autofocus />
-        <button type="submit" value="Submit">GO</button>
+		<input type="text" name="barcode" autofocus onchange="this.form.submit()" />
     </form>
 	{% include 'review.html' %}
 </html>
