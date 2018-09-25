@@ -1,4 +1,5 @@
 # Importing libraries for use in the project
+from generator import generate
 from __future__ import print_function
 from bs4 import BeautifulSoup
 import requests
@@ -30,25 +31,24 @@ def scrape(barcode):
 	print("done")
 
 	# Scrape the title from the DOM
-	title = soup.find("div", {"class": "displayElementText INITIAL_TITLE_SRCH"})
+	title = soup.find("div", {"class": "displayElementText INITIAL_TITLE_SRCH"}).text
 	# Scrape the picture from the DOM
 	picture_link = soup.find("img", {"id": "detailCover0"})
 	# removing garbage from the image link (might not be consistent)
 	picture_link = str(picture_link).replace("amp;", "")
 
-	# Write the HTML!
-	print("Generating HTML file... ", end="")
-	f = open("./templates/review.html", "w")
+	# Scrape the author
+	author = soup.find("div", {"class": "displayElementText INITIAL_AUTHOR_SRCH"}).text
+	author = author.text
+	author = author.replace(", author.", "")
+	author = author.replace(" author.", "")
 
-	# Write the book title here
-	f.write(str(title))
-	# Write the picture here
-	f.write(picture_link)
+	# Scrape the types
+	types = soup.find_all("div", {"class": "displayElementText SUBJECT_TERM"})
 
-	# Write the reviews
-	for rev in review_list:
-		f.write(rev)
-		f.write("<br/>")
+	# Create JSON to pass to generator
 
-	f.close()
-	print("done")
+	# Call generator
+	generate()
+
+
