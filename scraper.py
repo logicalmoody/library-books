@@ -33,13 +33,12 @@ def scrape(barcode):
 	# Scrape the title from the DOM
 	title = soup.find("div", {"class": "displayElementText INITIAL_TITLE_SRCH"}).text
 	# Scrape the picture from the DOM
-	image = soup.find("img", {"id": "detailCover0"})
+	image_link = soup.find("img", {"id": "detailCover0"})
 	# removing garbage from the image link (might not be consistent)
-	image = str(image).replace("amp;", "")
+	image_link = str(image_link).replace("amp;", "")
 
 	# Scrape the author
 	author = soup.find("div", {"class": "displayElementText INITIAL_AUTHOR_SRCH"}).text
-	author = author.text
 	author = author.replace(", author.", "")
 	author = author.replace(" author.", "")
 
@@ -50,11 +49,19 @@ def scrape(barcode):
 	data = {
 		"title": title,
 		"author": author,
-		"image": image,
-		""
+		"image_link": image_link,
+		"genres": [],
+		"reviews": []
 	}
+	for genre in types:
+		data['genres'].append(genre.text)
+	
+	for review in review_list:
+		data['reviews'].append(review)
+
+	# print(data)
 
 	# Call generator
-	generate()
+	generate(data)
 
 
