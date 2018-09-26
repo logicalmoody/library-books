@@ -1,6 +1,6 @@
 # Importing libraries for use in the project
-from generator import generate
 from __future__ import print_function
+from generator import generate
 from bs4 import BeautifulSoup
 import requests
 
@@ -33,9 +33,9 @@ def scrape(barcode):
 	# Scrape the title from the DOM
 	title = soup.find("div", {"class": "displayElementText INITIAL_TITLE_SRCH"}).text
 	# Scrape the picture from the DOM
-	picture_link = soup.find("img", {"id": "detailCover0"})
+	image = soup.find("img", {"id": "detailCover0"})
 	# removing garbage from the image link (might not be consistent)
-	picture_link = str(picture_link).replace("amp;", "")
+	image = str(image).replace("amp;", "")
 
 	# Scrape the author
 	author = soup.find("div", {"class": "displayElementText INITIAL_AUTHOR_SRCH"}).text
@@ -47,6 +47,12 @@ def scrape(barcode):
 	types = soup.find_all("div", {"class": "displayElementText SUBJECT_TERM"})
 
 	# Create JSON to pass to generator
+	data = {
+		"title": title,
+		"author": author,
+		"image": image,
+		""
+	}
 
 	# Call generator
 	generate()
